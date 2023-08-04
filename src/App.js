@@ -4,8 +4,11 @@ import MovieList from './components/movie-list';
 
 function App() {
   const [movies, setMovies] = useState([])
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   let tokenFromDjango = 'e515015c76aca083e644f86cb6a80a4fb687b79a';
+
+  
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/movies/',{
@@ -23,13 +26,17 @@ function App() {
       });
   }, [])
 
+  const movieClicked = movie => {
+    setSelectedMovie(movie);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Movie Rater</h1>
       </header>
       <div className="layout">
-        <MovieList movies={movies}/>
+        <MovieList movies={movies} movieClicked={movieClicked}/>
         
         <div>Movie details</div>
       </div>
