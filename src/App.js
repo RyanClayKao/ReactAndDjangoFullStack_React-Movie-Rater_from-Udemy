@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import MovieList from './components/movie-list';
+import MovieDetials from './components/movie-details';
 
 function App() {
   const [movies, setMovies] = useState([])
@@ -37,8 +38,7 @@ function App() {
       </header>
       <div className="layout">
         <MovieList movies={movies} movieClicked={movieClicked}/>
-        
-        <div>Movie details</div>
+        <MovieDetials movie={selectedMovie}/>
       </div>
     </div>
   );
