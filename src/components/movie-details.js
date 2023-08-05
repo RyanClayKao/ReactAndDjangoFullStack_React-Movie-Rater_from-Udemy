@@ -20,10 +20,24 @@ function MovieDetails(props) {
                 'Content-Type': 'application/json',
                 'Authorization': 'Token ' + tokenFromDjango
             },
-            body: JSON.stringify({'stars': rateNumber})
+            body: JSON.stringify({'stars': rateNumber + 1})
+        }).then(() => getMovieDetail())
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    const getMovieDetail = movieId => {
+        fetch(`http://127.0.0.1:8000/api/movies/${movie.id}/`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + tokenFromDjango
+            },
         }).then(res => res.json())
             .then(data => {
                 console.log(data);
+                props.reloadSelectedMovie(data);
             })
             .catch(err => {
                 console.log(err);
