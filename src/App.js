@@ -7,7 +7,8 @@ function App() {
   const [movies, setMovies] = useState([])
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  let tokenFromDjango = 'e515015c76aca083e644f86cb6a80a4fb687b79a';
+  // let tokenFromDjango = 'e515015c76aca083e644f86cb6a80a4fb687b79a';
+  let tokenFromDjango = '1408223a9e6c16ca818746457a6905a20532e0c6';
 
   
 
