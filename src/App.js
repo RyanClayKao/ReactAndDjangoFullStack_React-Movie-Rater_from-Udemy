@@ -58,6 +58,17 @@ function App() {
   const addMovieToList = movie => {
     const newMovies = [...movies, movie];
     setMovies(newMovies);
+    setEditedMovie(movie);
+  }
+
+  const removeClicked = movie => {
+    // 這裡只做 UI資料的移除狀況
+    const newMovies = movies.filter(item => item.id !== movie.id);
+    setMovies(newMovies);
+
+    // 回到 UI初始狀態 (否則會殘留狀態)
+    setSelectedMovie(null);
+    setEditedMovie(null);
   }
 
   return (
@@ -67,7 +78,12 @@ function App() {
       </header>
       <div className="layout">
         <div>
-          <MovieList movies={movies} movieClicked={reloadSelectedMovie} editClicked={editClicked}/>
+          <MovieList 
+            movies={movies} 
+            movieClicked={reloadSelectedMovie} 
+            editClicked={editClicked} 
+            removeClicked={removeClicked}
+          />
           <button onClick={newMovie}>New Movie</button>
         </div>
         <MovieDetials movie={selectedMovie} reloadSelectedMovie={reloadSelectedMovie}/>
