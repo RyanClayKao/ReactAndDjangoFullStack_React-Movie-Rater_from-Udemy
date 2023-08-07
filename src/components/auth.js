@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import API from '../api-service';
+import { TokenContext } from '../index';
 
 function Auth() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const {token, setToken} = useContext(TokenContext);
+
     const loginClicked = () => {
         API.loginUser({username, password})
-        .then(data => {
-            console.log(data.token);
-        })
+        .then(data => { setToken(data.token) })
         .catch(err => {
             console.log(err);
             alert("登入時系統發生錯誤");
         });
     }
+
+    useEffect(() => {
+        console.log(token);
+        if (token) { window.location.href = "/movies" }
+    }, [token]);
 
     return (
         <div>
