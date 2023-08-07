@@ -5,3 +5,5 @@ function Auth() {
         <h1>Auth components</h1>
     )
 }
+
+export default Auth;

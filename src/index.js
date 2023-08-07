@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Auth from "./components/auth";
 import reportWebVitals from './reportWebVitals';
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Auth />} />
+        <Route exact path="/movies" element={<App />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
