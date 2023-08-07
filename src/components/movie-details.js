@@ -2,18 +2,22 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 // import { faStar } from '@fortawesome/free-regular-svg-icons';
+import { useCookies } from 'react-cookie';
 
 function MovieDetails(props) {
     const movie = props.movie;
 
     const [highlight, setHighlight] = useState(-1);
+    const [token] = useCookies(['mr-token']); // 這裡的 mr指的是 movie-rater 的縮寫
 
     const highlightRate = highIndex => event => {
         setHighlight(highIndex);
     }
 
-    const tokenFromDjango = 'e515015c76aca083e644f86cb6a80a4fb687b79a';
+    // const tokenFromDjango = 'e515015c76aca083e644f86cb6a80a4fb687b79a';
     // const tokenFromDjango = '1408223a9e6c16ca818746457a6905a20532e0c6';
+    const tokenFromDjango = token['mr-token'];
+
     const rateClicked = rateNumber => event => {
         fetch(`http://127.0.0.1:8000/api/movies/${movie.id}/rate_movie/`, {
             method: "POST",

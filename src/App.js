@@ -3,14 +3,17 @@ import './App.css';
 import MovieList from './components/movie-list';
 import MovieDetials from './components/movie-details';
 import MovieForm from './components/movie-form';
+import { useCookies } from 'react-cookie';
 
 function App() {
   const [movies, setMovies] = useState([])
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [editedMovie, setEditedMovie] = useState(null);
+  const [token] = useCookies(['mr-token']);
 
-  let tokenFromDjango = 'e515015c76aca083e644f86cb6a80a4fb687b79a';
+  // let tokenFromDjango = 'e515015c76aca083e644f86cb6a80a4fb687b79a';
   // let tokenFromDjango = '1408223a9e6c16ca818746457a6905a20532e0c6';
+  let tokenFromDjango = token['mr-token'];
 
   
 
@@ -28,7 +31,11 @@ function App() {
       .catch(err => {
         console.log(err);
       });
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    if (!token['mr-token']) { window.location.href = "/" }
+}, [token]);
 
   const reloadSelectedMovie = (movie) => {
     setSelectedMovie(movie);
