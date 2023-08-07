@@ -12,7 +12,8 @@ function MovieDetails(props) {
         setHighlight(highIndex);
     }
 
-    const tokenFromDjango = '1408223a9e6c16ca818746457a6905a20532e0c6';
+    const tokenFromDjango = 'e515015c76aca083e644f86cb6a80a4fb687b79a';
+    // const tokenFromDjango = '1408223a9e6c16ca818746457a6905a20532e0c6';
     const rateClicked = rateNumber => event => {
         fetch(`http://127.0.0.1:8000/api/movies/${movie.id}/rate_movie/`, {
             method: "POST",

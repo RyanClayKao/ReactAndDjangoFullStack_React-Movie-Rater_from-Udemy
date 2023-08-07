@@ -9,8 +9,8 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [editedMovie, setEditedMovie] = useState(null);
 
-  // let tokenFromDjango = 'e515015c76aca083e644f86cb6a80a4fb687b79a';
-  let tokenFromDjango = '1408223a9e6c16ca818746457a6905a20532e0c6';
+  let tokenFromDjango = 'e515015c76aca083e644f86cb6a80a4fb687b79a';
+  // let tokenFromDjango = '1408223a9e6c16ca818746457a6905a20532e0c6';
 
   
 
@@ -40,6 +40,16 @@ function App() {
     setSelectedMovie(null);
   }
 
+  const refreshMovies = movie => {
+    const newMovies = movies.map(item => {
+      if (item.id === movie.id){
+        return movie
+      }
+      return item;
+    })
+    setMovies(newMovies);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -48,7 +58,7 @@ function App() {
       <div className="layout">
         <MovieList movies={movies} movieClicked={reloadSelectedMovie} editClicked={editClicked}/>
         <MovieDetials movie={selectedMovie} reloadSelectedMovie={reloadSelectedMovie}/>
-        { editedMovie ? <MovieForm movie={editedMovie} /> : null }
+        { editedMovie ? <MovieForm movie={editedMovie} refreshMovies={refreshMovies}/> : null }
       </div>
     </div>
   );
