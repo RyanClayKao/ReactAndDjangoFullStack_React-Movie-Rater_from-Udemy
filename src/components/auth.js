@@ -32,6 +32,8 @@ function Auth() {
             });
     }
 
+    const isDisabled = username.length === 0  || password.length === 0;
+
     useEffect(() => {
         console.log(token);
         // if (token) { window.location.href = "/movies" }
@@ -41,9 +43,11 @@ function Auth() {
     }, [token]);
 
     return (
-        <div>
-            {isLoginView ? <h1>Login</h1> : <h1>Register</h1>}
-            <div>
+        <div className="App">
+            <header className="App-header">
+                {isLoginView ? <h1>Login</h1> : <h1>Register</h1>}
+            </header>
+            <div className="login-container">
                 <label htmlFor="username">Username</label><br />
                 <input id="username" type="text" placeholder="username" value={username}
                     onChange={event => setUsername(event.target.value)}
@@ -53,14 +57,14 @@ function Auth() {
                     onChange={event => setPassword(event.target.value)}
                 /><br />
                 {isLoginView ?
-                    <button onClick={loginClicked}>Login</button> :
-                    <button onClick={registerClicked}>Register</button>
+                    <button onClick={loginClicked} disabled={isDisabled}>Login</button> :
+                    <button onClick={registerClicked} disabled={isDisabled}>Register</button>
+                }
+                {isLoginView ?
+                    <p onClick={() => setIsLoginView(false)}>You don't have account? Register here!</p> :
+                    <p onClick={() => setIsLoginView(true)}>You already have account? Login here!</p>
                 }
             </div>
-            {isLoginView ?
-                <p onClick={() => setIsLoginView(false)}>You don't have account? Register here!</p> :
-                <p onClick={() => setIsLoginView(true)}>You already have account? Login here!</p>
-            }
         </div>
     )
 }

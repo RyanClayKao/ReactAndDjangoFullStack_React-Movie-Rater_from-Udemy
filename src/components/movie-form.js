@@ -23,6 +23,8 @@ function MovieForm(props) {
             .catch(err => console.log(err));
     }
 
+    const isDisabled = title.length === 0  || description.length === 0;
+
     useEffect(() => {
         setTitle(props.movie.title);
         setDescription(props.movie.description);
@@ -41,8 +43,8 @@ function MovieForm(props) {
                     <textarea id="description" placeholder="description" value={description}
                         onChange={event => setDescription(event.target.value)} ></textarea><br/>
                     { props.movie.id ? 
-                        <button onClick={updateClicked}>Update</button> :
-                        <button onClick={createClicked}>Create</button>
+                        <button onClick={updateClicked} disabled={isDisabled}>Update</button> :
+                        <button onClick={createClicked} disabled={isDisabled}>Create</button>
                     }
                 </div>
             ) : null}
