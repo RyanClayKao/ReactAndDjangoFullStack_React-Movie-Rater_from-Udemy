@@ -12,6 +12,17 @@ export default class API {
         .then(res => res.json());
     }
 
+    static registerUser(body){
+        return fetch(`http://127.0.0.1:8000/api/users/`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+        })
+        .then(res => res.json());
+    }
+
     static updateMovie(movie_id, body, token){
         return fetch(`http://127.0.0.1:8000/api/movies/${movie_id}/`, {
             method: "PUT",
