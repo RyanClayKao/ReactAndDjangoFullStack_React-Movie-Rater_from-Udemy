@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import API from '../api-service';
 
 function MovieForm(props) {
     let movie = props.movie;
 
-    const [title, setTitle] = useState(movie.title);
-    const [description, setDescription] = useState(movie.description);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
     const updateClicked = () => {
         console.log("update here");
@@ -20,6 +20,11 @@ function MovieForm(props) {
             .then(data => props.addMovieToList(data))
             .catch(err => console.log(err));
     }
+
+    useEffect(() => {
+        setTitle(props.movie.title);
+        setDescription(props.movie.description);
+    }, [props.movie])
 
     return (
         <React.Fragment>
