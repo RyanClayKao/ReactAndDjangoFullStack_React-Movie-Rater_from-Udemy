@@ -14,6 +14,13 @@ function MovieForm(props) {
             .catch(err => console.log(err));
     }
 
+    const createClicked = () => {
+        console.log("update here");
+        API.createMovie({ title, description })
+            .then(data => props.addMovieToList(data))
+            .catch(err => console.log(err));
+    }
+
     return (
         <React.Fragment>
             {movie ? (
@@ -26,7 +33,10 @@ function MovieForm(props) {
                     <label htmlFor="description">Description</label><br />
                     <textarea id="description" placeholder="description" value={description}
                         onChange={event => setDescription(event.target.value)} ></textarea><br/>
-                    <button onClick={updateClicked}>Update</button>
+                    { props.movie.id ? 
+                        <button onClick={updateClicked}>Update</button> :
+                        <button onClick={createClicked}>Create</button>
+                    }
                 </div>
             ) : null}
 
